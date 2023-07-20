@@ -1,0 +1,8 @@
+﻿  main.cpp
+C:\Research\Project\ResourcesConstraintedPath\ResourcesConstraintedPath\dominant_check_3.h(27,23): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+C:\Research\Project\ResourcesConstraintedPath\ResourcesConstraintedPath\dominant_check_3.h(28,24): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+C:\Research\Project\ResourcesConstraintedPath\ResourcesConstraintedPath\dominant_check_3.h(120,50): warning C4244: 'argument': conversion from '__int64' to 'int', possible loss of data
+C:\Research\Project\ResourcesConstraintedPath\ResourcesConstraintedPath\dominant_check_3.h(160,50): warning C4244: 'argument': conversion from '__int64' to 'int', possible loss of data
+C:\Research\Project\ResourcesConstraintedPath\ResourcesConstraintedPath\tree_dominant_check.h(121,27): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+C:\Research\Project\ResourcesConstraintedPath\ResourcesConstraintedPath\tree_dominant_check.h(122,28): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+  Resources_Constrain_Routing_Dominant_Check.vcxproj -> C:\Portfolio_project\Resources_Constrain_Routing_Dominant_Check\x64\Debug\Resources_Constrain_Routing_Dominant_Check.exe
