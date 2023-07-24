@@ -16,6 +16,7 @@
 using namespace std;
 
 struct Node {
+    // Node here can also interpreted as a path.
     double cost;
     int time;
     int load;
@@ -24,6 +25,8 @@ struct Node {
 
 };
 bool valid_path(const Node& node, const Node& node2) {
+    // checking the visited vector, to satisfy the condition of dominatant
+
     int trueCountNode = std::count(std::begin(node.visited), std::end(node.visited), true);
     int trueCountNode2 = std::count(std::begin(node2.visited), std::end(node2.visited), true);
 
@@ -44,6 +47,8 @@ bool randomBool() {
     return rand() > (RAND_MAX / 2);
 }
 void removeNodes(vector<Node>& node_vector, const set<int>& to_erase) {
+    // helper function to removed all the node with for node vector with the help
+    // of a set of predefine position of node need to be delete
     for (auto it = to_erase.rbegin(); it != to_erase.rend(); ++it) {
         node_vector.erase(node_vector.begin() + *it);
     }
@@ -107,6 +112,7 @@ pair<std::vector<Node>, std::vector<Node>> unsorted_array_dominant_check(std::ve
 
     for (const Node& node : nodes) {
         bool shouldInsert = true;
+        //spliting this into 2, if shouldInsert is true than continute the second comparision, reduce number of uneccsary comparision
         for (const auto& existingNode : node_vector) {
             if (node.time >= existingNode.time && node.load >= existingNode.load && node.cost >= existingNode.cost && valid_path(existingNode, node)) {
                 shouldInsert = false;
@@ -114,14 +120,16 @@ pair<std::vector<Node>, std::vector<Node>> unsorted_array_dominant_check(std::ve
             }
         }
         if (shouldInsert) {
+            //inserting the node
             node_vector.push_back(node);
+            //checking if the inserted node dominating any existing node.
             for (auto it = node_vector.begin(); it != node_vector.end() - 1; ++it) {
                 if (node.time <= it->time && node.load <= it->load && node.cost <= it->cost && valid_path(node, *it)) {
                     to_erase.insert(std::distance(node_vector.begin(), it));
-                    //node_vector_removed_list.push_back(*it);
                 }
             }
         }
+        //remove all the node after each iteration
         removeNodes(node_vector, to_erase);
         to_erase.clear(); //
     }
@@ -138,6 +146,8 @@ pair<std::vector<Node>, std::vector<Node>> sorted_array_dominant_check1(const st
         bool shouldInsert = true;
 
          //Iterate until condition is met or we reach the end
+        // because this is sorted by time, we need to find the first postion where the next item is larger than
+        // the current inserted
         while (it != node_vector.end() && (*it).time <= node.time) {
             if (node.cost >= it->cost && node.load >= it->load && node.time >= it->time && valid_path(*it, node)) {
                 shouldInsert = false;
@@ -151,6 +161,8 @@ pair<std::vector<Node>, std::vector<Node>> sorted_array_dominant_check1(const st
 
         // If no dominating node found, insert the current node at the determined position
         if (shouldInsert) {
+            // a binary search here to quickly find the postion, need to be the first element if there is any 
+            // duplication 2,2,2,2,2.
             auto it = std::lower_bound(node_vector.begin(), node_vector.end(), node, [](const Node& a, const Node& b) {
                 return a.time < b.time;
                 });
@@ -187,6 +199,7 @@ std::list<Node> dominant_check(const std::vector<Node>& nodes) {
                     it = node_list.erase(it);  // erase returns next iterator
                 }
                 else {
+                    //moving to the next it if there no deletiion here.
                     ++it;
                 }
             }
